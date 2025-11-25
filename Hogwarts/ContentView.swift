@@ -8,14 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var bookVM = BookViewModel()
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            if let bookCatalog = bookVM.bookCatalog{
+                Text(bookCatalog.description)
+//                Text(bookCatalog[0].id)
+//                ForEach(bookCatalog) { catalog in
+//                    Text(catalog.name)
+//                }
+            }
         }
         .padding()
+        .onAppear{
+            bookVM.loadAllBooks()
+        }
     }
 }
 
