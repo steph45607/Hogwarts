@@ -93,7 +93,7 @@ struct BookDetailsView: View {
                         VStack(alignment: .leading){
                             Text("\(chp.attributes.order) \(chp.attributes.slug.fromSlugToTitleCase())")
                                 .font(.belle18)
-                            Text(chp.attributes.summary ?? "Summary not found")
+                            Text((chp.attributes.summary?.isEmpty == true ? "Summary not available" : chp.attributes.summary) ?? "Summary not available")
                         }
                         .padding(.bottom, 4)
                     }

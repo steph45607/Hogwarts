@@ -9,30 +9,35 @@ import SwiftUI
 
 struct MainView: View {
     var body: some View {
-        TabView{
-            BookCatalogView()
-                .tabItem{
-                    Label("Books", systemImage: "book.closed")
-                }
-            BookCatalogView()
-                .tabItem{
-                    Label("Movies", systemImage: "book.closed")
-                }
-            BookCatalogView()
-                .tabItem{
-                    Label("Characters", systemImage: "book.closed")
-                }
-            BookCatalogView()
-                .tabItem{
-                    Label("Potions", systemImage: "book.closed")
-                }
-            BookCatalogView()
-                .tabItem{
-                    Label("Spells", systemImage: "book.closed")
-                }
+        VStack{
+//            VStack{
+//                Text("Today's Recommendation")
+//            }
+            TabView{
+                BookCatalogView()
+                    .tabItem{
+                        Label("Books", systemImage: "book.closed")
+                    }
+                MovieCatalogView()
+                    .tabItem{
+                        Label("Movies", systemImage: "movieclapper.fill")
+                    }
+                BookCatalogView()
+                    .tabItem{
+                        Label("Characters", systemImage: "figure.wave")
+                    }
+                BookCatalogView()
+                    .tabItem{
+                        Label("Potions", systemImage: "bubbles.and.sparkles")
+                    }
+                BookCatalogView()
+                    .tabItem{
+                        Label("Spells", systemImage: "wand.and.sparkles")
+                    }
 
+            }
+            .tint(.steps)
         }
-        .tint(.steps)
     }
 }
 

@@ -33,6 +33,7 @@ class BookViewModel: ObservableObject{
     }
     
     func loadAllChapters(bookId:String){
+        chapterList = []
         BookService.getAllChapters(bookId: String(bookId)){ [weak self] result in
             DispatchQueue.main.async{
                 print("dispatch getAllChapters")

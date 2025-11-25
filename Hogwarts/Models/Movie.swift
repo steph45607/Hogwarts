@@ -10,21 +10,30 @@ import Foundation
 import Foundation
 
 struct MovieCatalog: Codable{
-    let data : [BookResponse]
+    let data : [MovieResponse]
 }
 
 struct MovieResponse : Identifiable, Codable {
     let id: String
-    let attributes : Book
+    let attributes : Movie
 }
 
 struct Movie : Codable {
-    let author: String
-    let cover: String
-    let dedication: String
-    let pages: Int
-    let release_date : String
-    let summary: String
-    let title: String
-    let wiki: String
+        let box_office: String?
+        let budget: String?
+        let cinematographers: [String]?
+        let directors: [String]?
+        let distributors: [String]?
+        let editors: [String]?
+        let music_composers: [String]?
+        let poster: String?
+        let producers: [String]?
+        let rating: String?
+        let release_date: String?
+        let running_time: String?
+        let screenwriters: [String]?
+        let summary: String?
+        let title: String
+        let trailer: String?
+        let wiki: String?
 }
