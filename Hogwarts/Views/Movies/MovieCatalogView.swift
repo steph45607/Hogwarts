@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MovieCatalogView: View {
-    @StateObject private var movieVM = MovieViewModel()
+    @StateObject private var movieVM = ViewModel()
     //    
     let columns = [
         GridItem(.flexible()),

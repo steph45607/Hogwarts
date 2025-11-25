@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MovieDetailsView: View {
     @State var movie : MovieResponse
-    @ObservedObject private var movieVM = MovieViewModel()
+    @ObservedObject private var movieVM = ViewModel()
     
     var body: some View {
         ScrollView{

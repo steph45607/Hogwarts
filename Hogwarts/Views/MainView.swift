@@ -22,7 +22,7 @@ struct MainView: View {
                     .tabItem{
                         Label("Movies", systemImage: "movieclapper.fill")
                     }
-                BookCatalogView()
+                CharacterCatalogView()
                     .tabItem{
                         Label("Characters", systemImage: "figure.wave")
                     }

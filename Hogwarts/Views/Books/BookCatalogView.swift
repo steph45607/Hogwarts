@@ -27,6 +27,7 @@ struct BookCatalogView: View {
                 //                ScrollView{
                 VStack(alignment: .leading){
                     Text("Books")
+//                        .font()
                         .font(.belle26)
                     ScrollView{
                         if let bookCatalog = bookVM.bookCatalog{

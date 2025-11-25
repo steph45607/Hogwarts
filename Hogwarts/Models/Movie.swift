@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 struct MovieCatalog: Codable{
     let data : [MovieResponse]
 }

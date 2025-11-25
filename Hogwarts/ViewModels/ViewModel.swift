@@ -8,19 +8,38 @@
 import Foundation
 import Combine
 
-class MovieViewModel: ObservableObject{
-    @Published var movie : Movie?
+class ViewModel: ObservableObject{
+//    @Published var movie : Movie?
     @Published var errorMessage: String?
     @Published var movieCatalog: [MovieResponse]? = []
+    @Published var characterCatalog: [CharacterResponse]? = []
     
     func loadAllMovies(){
-        MovieService.getAllMovies{ [weak self] result in
+        Services.getAllMovies{ [weak self] result in
             DispatchQueue.main.async{
                 print("dispatch getAllMovies")
                 switch result{
                 case .success(let movieCatalog):
                     print("success vm load one")
                     self?.movieCatalog = movieCatalog
+                    
+                case .failure(let error):
+                    print("failure vm load one")
+                    self?.errorMessage = self?.mapError(error)
+                }
+            }
+            
+        }
+    }
+    
+    func loadAllCharacters(asc: Bool){
+        Services.getAllCharacters(asc : asc){ [weak self] result in
+            DispatchQueue.main.async{
+                print("dispatch getAllMovies")
+                switch result{
+                case .success(let characterCatalog):
+                    print("success vm load one")
+                    self?.characterCatalog = characterCatalog
                     
                 case .failure(let error):
                     print("failure vm load one")
