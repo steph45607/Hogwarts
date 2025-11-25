@@ -17,23 +17,27 @@ struct BookResponse : Identifiable, Codable {
 }
 
 struct Book : Codable {
-    let name: String
-//    let attributes :  Book
-//    let cover: String
-//    let dedication: String
-//    let pages: Int
-//    let release_date : String
-//    let summary: String
-//    let title: String
-//    let wiki: String
+    let author: String
+    let cover: String
+    let dedication: String
+    let pages: Int
+    let release_date : String
+    let summary: String
+    let title: String
+    let wiki: String
 }
 
-struct ChapterResponse: Codable{
+struct ChapterList: Codable{
+    let data : [ChapterResponse]
+}
+
+struct ChapterResponse: Identifiable, Codable{
     let id: String
-    let data: Chapter
+    let attributes: Chapter
 }
-
+//
 struct Chapter : Codable{
     let order : Int
-    let summary : String
+    let slug : String
+    let summary : String?
 }
