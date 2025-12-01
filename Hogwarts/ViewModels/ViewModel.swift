@@ -16,7 +16,48 @@ class ViewModel: ObservableObject{
     @Published var potionCatalog: [PotionResponse]? = []
     @Published var spellCatalog: [SpellResponse]? = []
     @Published var characterCatalogPage :  Page = Page(current: 1, first: 1, prev: 0, next: 0, last: 0, records: 0)
-//    @Published var characterCatalogLinks : Links = Links(current: "", first: "", prev: "", next: "", last: "")
+//    @Published var book : Book?
+    @Published var bookCatalog: [BookResponse]? = []
+    @Published var chapterList: [ChapterResponse]? = []
+    
+    func loadAllBooks(){
+        BookService.getAllBooks{ [weak self] result in
+            DispatchQueue.main.async{
+                print("dispatch getAllBooks")
+                switch result{
+                case .success(let bookCatalog):
+                    print("success vm load one")
+                    self?.bookCatalog = bookCatalog
+                    
+                case .failure(let error):
+                    print("failure vm load one")
+                    self?.errorMessage = self?.mapError(error)
+                }
+            }
+            
+        }
+    }
+    
+    func loadAllChapters(bookId:String){
+        chapterList = []
+        BookService.getAllChapters(bookId: String(bookId)){ [weak self] result in
+            DispatchQueue.main.async{
+                print("dispatch getAllChapters")
+                print("VIEWMODEL ", bookId)
+                switch result{
+                case .success(let chapterList):
+                    print("success vm load one")
+                    self?.chapterList = chapterList
+                    
+                case .failure(let error):
+                    print("failure vm load one")
+                    self?.errorMessage = self?.mapError(error)
+                }
+            }
+            
+        }
+    }
+    
     func loadAllMovies(){
         Services.getAllMovies{ [weak self] result in
             DispatchQueue.main.async{
@@ -158,5 +199,25 @@ class ViewModel: ObservableObject{
             print("decoding")
             return "Decoding failed"
         }
+    }
+}
+
+extension ViewModel {
+    var movieOfTheDay: MovieResponse? {
+        guard let list = movieCatalog, !list.isEmpty else { return nil }
+
+        let day = Calendar.current.ordinality(of: .day, in: .year, for: Date()) ?? 1
+        let index = day % list.count
+
+        return list[index]
+    }
+    
+    var bookOfTheDay: BookResponse? {
+        guard let list = bookCatalog, !list.isEmpty else { return nil }
+
+        let day = Calendar.current.ordinality(of: .day, in: .year, for: Date()) ?? 1
+        let index = day % list.count
+
+        return list[index]
     }
 }

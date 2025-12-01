@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BookDetailsView: View {
     @State var book : BookResponse
-    @ObservedObject private var bookVM = BookViewModel()
+    @ObservedObject private var bookVM = ViewModel()
     
     var body: some View {
         ScrollView{

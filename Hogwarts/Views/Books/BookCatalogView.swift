@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BookCatalogView: View {
-    @StateObject private var bookVM = BookViewModel()
+    @StateObject private var bookVM = ViewModel()
     //    @Namespace private var animationNamespace
     //    
     let columns = [

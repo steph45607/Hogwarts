@@ -8,17 +8,30 @@
 import SwiftUI
 
 struct MainView: View {
+    @ObservedObject private var vm = ViewModel()
     var body: some View {
         NavigationStack{
             ZStack{
                 Color.background.ignoresSafeArea()
-                VStack{
-                    VStack(alignment: .leading){
+                VStack(alignment: .leading){
+                    VStack(alignment: .leading, spacing: 8) {
                         Text("Today's Recommendation")
-                        
+                            .font(.belle26)
+
+                        if let movie = vm.movieOfTheDay, let book = vm.bookOfTheDay{
+                            HStack{
+                                MovieCard(movie: movie)
+                                BookCard(book: book)
+                            }
+                        } else {
+                            Text("Loading…")
+                                .font(.belle20)
+                                .foregroundColor(.steps)
+                        }
                     }
+                    .padding(.horizontal)
                     List{
-                        Section("Menu"){
+                        Section{
                             NavigationLink {
                                 BookCatalogView()
                             } label: {
@@ -45,6 +58,9 @@ struct MainView: View {
                             } label: {
                                 Label("Spells", systemImage: "wand.and.sparkles")
                             }
+                        } header: {
+                            Text("Menu")
+                                .font(.belle26)
                         }
                         .listRowBackground(Color.paper)
                     }
@@ -55,6 +71,10 @@ struct MainView: View {
                     .scrollContentBackground(.hidden)
                 }
             }
+        }
+        .onAppear{
+            vm.loadAllMovies()
+            vm.loadAllBooks()
         }
     }
 }
