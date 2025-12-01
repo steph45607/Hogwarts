@@ -9,34 +9,52 @@ import SwiftUI
 
 struct MainView: View {
     var body: some View {
-        VStack{
-//            VStack{
-//                Text("Today's Recommendation")
-//            }
-            TabView{
-                BookCatalogView()
-                    .tabItem{
-                        Label("Books", systemImage: "book.closed")
+        NavigationStack{
+            ZStack{
+                Color.background.ignoresSafeArea()
+                VStack{
+                    VStack(alignment: .leading){
+                        Text("Today's Recommendation")
+                        
                     }
-                MovieCatalogView()
-                    .tabItem{
-                        Label("Movies", systemImage: "movieclapper.fill")
+                    List{
+                        Section("Menu"){
+                            NavigationLink {
+                                BookCatalogView()
+                            } label: {
+                                Label("Books", systemImage: "book.closed")
+                            }
+                            NavigationLink {
+                                MovieCatalogView()
+                            } label: {
+                                Label("Movies", systemImage: "movieclapper.fill")
+                            }
+                            NavigationLink {
+                                CharacterCatalogView()
+                            } label: {
+                                Label("Characters", systemImage: "figure.wave")
+                            }
+                            NavigationLink {
+                                BookCatalogView()
+                            } label: {
+        //                        Text("Potions")
+                                Label("Potions", systemImage: "bubbles.and.sparkles")
+                            }
+                            NavigationLink {
+                                BookCatalogView()
+                            } label: {
+                                Label("Spells", systemImage: "wand.and.sparkles")
+                            }
+                        }
+                        .listRowBackground(Color.paper)
                     }
-                CharacterCatalogView()
-                    .tabItem{
-                        Label("Characters", systemImage: "figure.wave")
-                    }
-                BookCatalogView()
-                    .tabItem{
-                        Label("Potions", systemImage: "bubbles.and.sparkles")
-                    }
-                BookCatalogView()
-                    .tabItem{
-                        Label("Spells", systemImage: "wand.and.sparkles")
-                    }
-
+//                    .content.background(.red)
+                    .font(.belle18)
+                    .foregroundColor(.steps)
+                    .tint(.steps)
+                    .scrollContentBackground(.hidden)
+                }
             }
-            .tint(.steps)
         }
     }
 }

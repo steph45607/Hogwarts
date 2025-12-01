@@ -71,4 +71,101 @@ struct Services {
             }
         }.resume()
     }
+    
+    static func getCharactersPage(page: Int, asc: Bool ,completion: @escaping (Result<CharacterCatalog, APIError>) -> Void){
+        print("getAllMovies called")
+        let urlString = "https://api.potterdb.com/v1/characters?page[number]=\(page)&&\(asc ? "sort=name":"sort=-name")"
+        guard let url = URL(string: urlString) else {
+            print("failed to getAllMovies")
+            completion(.failure(.invalidURL))
+            return
+        }
+//        print("test")
+        URLSession.shared.dataTask(with: url){ data, response, error in
+            if let _ = error {
+                print("failed service request")
+                completion(.failure(.requestFailed))
+                return
+            }
+            
+            guard let data = data else {
+                print("failed service request data")
+                completion(.failure(.requestFailed))
+                return
+            }
+            
+            do{
+                print("get response here")
+                let response = try JSONDecoder().decode(CharacterCatalog.self, from: data)
+                completion(.success(response))
+            } catch {
+                print("failed decoding response \(error)")
+                completion(.failure(.decodingError))
+            }
+        }.resume()
+    }
+    
+    static func getAllPotions(completion: @escaping (Result<[PotionResponse], APIError>) -> Void){
+        print("getAllPotions called")
+        guard let url = URL(string: "https://api.potterdb.com/v1/potions") else {
+            print("failed to getAllPotions")
+            completion(.failure(.invalidURL))
+            return
+        }
+        print("test")
+        URLSession.shared.dataTask(with: url){ data, response, error in
+            if let _ = error {
+                print("failed service request")
+                completion(.failure(.requestFailed))
+                return
+            }
+            
+            guard let data = data else {
+                print("failed service request data")
+                completion(.failure(.requestFailed))
+                return
+            }
+            
+            do{
+                print("get response here")
+                let response = try JSONDecoder().decode(PotionCatalog.self, from: data)
+                completion(.success(response.data))
+            } catch {
+                print("failed decoding response \(error)")
+                completion(.failure(.decodingError))
+            }
+        }.resume()
+    }
+    
+    static func getAllSpells(completion: @escaping (Result<[SpellResponse], APIError>) -> Void){
+        print("getAllSpells called")
+        guard let url = URL(string: "https://api.potterdb.com/v1/spells") else {
+            print("failed to getAllSpells")
+            completion(.failure(.invalidURL))
+            return
+        }
+        print("test")
+        URLSession.shared.dataTask(with: url){ data, response, error in
+            if let _ = error {
+                print("failed service request")
+                completion(.failure(.requestFailed))
+                return
+            }
+            
+            guard let data = data else {
+                print("failed service request data")
+                completion(.failure(.requestFailed))
+                return
+            }
+            
+            do{
+                print("get response here")
+                let response = try JSONDecoder().decode(SpellCatalog.self, from: data)
+                completion(.success(response.data))
+            } catch {
+                print("failed decoding response \(error)")
+                completion(.failure(.decodingError))
+            }
+        }.resume()
+    }
 }

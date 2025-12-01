@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MovieCatalogView.swift
 //  Hogwarts
 //
 //  Created by Stephanie Staniswinata on 25/11/25.
@@ -7,10 +7,9 @@
 
 import SwiftUI
 
-struct BookCatalogView: View {
-    @StateObject private var bookVM = BookViewModel()
-    //    @Namespace private var animationNamespace
-    //    
+struct PotionCatalogView: View {
+    @StateObject private var vm = ViewModel()
+    //
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible())
@@ -25,13 +24,13 @@ struct BookCatalogView: View {
             ZStack{
                 Color.background.ignoresSafeArea()
                 VStack(alignment: .leading){
-                    Text("Books")
+                    Text("Potions")
                         .font(.belle26)
                     ScrollView{
-                        if let bookCatalog = bookVM.bookCatalog{
+                        if let potions = vm.potionCatalog{
                             LazyVGrid(columns: columns){
-                                ForEach(bookCatalog){ book in
-                                    BookCard(book: book)
+                                ForEach(potions){ potion in
+                                    PotionCard(potion: potion)
                                 }
                             }
                         }
@@ -40,7 +39,7 @@ struct BookCatalogView: View {
                 }
                 .padding()
                 .onAppear{
-                    bookVM.loadAllBooks()
+                    vm.loadAllPotions()
                 }
             }
         }
@@ -48,5 +47,5 @@ struct BookCatalogView: View {
 }
 
 #Preview {
-    BookCatalogView()
+    MovieCatalogView()
 }

@@ -9,6 +9,30 @@ import Foundation
 
 struct CharacterCatalog: Codable{
     let data : [CharacterResponse]
+    let meta : Pagination
+    let links : Links
+}
+// so it can acess the page number, use Links since it has the same attributes
+struct Pagination: Codable{
+    let pagination: Page
+}
+
+struct Page: Codable{
+    var current : Int
+    let first : Int?
+    let prev : Int?
+    let next: Int?
+    let last : Int?
+    let records : Int
+}
+
+// to get the links for every case
+struct Links: Codable{
+    let current : String
+    let first : String?
+    let prev : String?
+    let next: String?
+    let last : String?
 }
 
 struct CharacterResponse : Identifiable, Codable {

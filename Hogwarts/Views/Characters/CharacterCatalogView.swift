@@ -48,12 +48,60 @@ struct CharacterCatalogView: View {
                     }
                     .scrollIndicators(.hidden)
                 }
+                .toolbar(content: {
+                    ToolbarItem(placement: .bottomBar) {
+                        Button{
+                            print("first")
+                            vm.firstPage(asc: sort)
+                        }label:{
+                            Image(systemName: "chevron.backward.to.line")
+                                .tint(.steps)
+                        }
+                    }
+                    ToolbarItem(placement: .bottomBar) {
+                        Button{
+                            print("prev")
+                            vm.prevPage(asc: sort)
+                        }label:{
+                            Image(systemName: "chevron.backward")
+                                .tint(.steps)
+                        }
+                    }
+                    ToolbarItem(placement: .bottomBar){
+                        Text("\(vm.characterCatalogPage.current)")
+//                            .padding()
+//                            .background(.steps)
+//                            .cornerRadius(20)
+//                            .foregroundColor(.white)
+                    }
+                    ToolbarItem(placement: .bottomBar) {
+                        Button{
+                            print("next")
+                            vm.nextPage(asc: sort)
+                        }label:{
+                            Image(systemName: "chevron.forward")
+                                .tint(.steps)
+                        }
+                    }
+                    ToolbarItem(placement: .bottomBar) {
+                        Button{
+                            print("end")
+                            vm.lastPage(asc: sort)
+                        }label:{
+                            Image(systemName: "chevron.forward.to.line")
+                                .tint(.steps)
+                        }
+                    }
+                })
                 .padding()
                 .onChange(of: sort, { _, _ in
-                    vm.loadAllCharacters(asc: sort)
+//                    vm.loadAllCharacters(asc: sort)
+//                    vm.loadPageCharacters(asc: newSort)
+                    vm.sortCurrentPage(asc: sort)
                 })
                 .onAppear{
-                    vm.loadAllCharacters(asc: sort)
+//                    vm.loadAllCharacters(asc: sort)
+                    vm.loadPageCharacters(asc: sort)
                 }
             }
         }
