@@ -1,5 +1,5 @@
 //
-//  PotionCatalogView.swift
+//  SpellCatalogView.swift
 //  Hogwarts
 //
 //  Created by Stephanie Staniswinata on 25/11/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PotionCatalogView: View {
+struct SpellCatalogView: View {
     @StateObject private var vm = ViewModel()
     //    @Namespace private var animationNamespace
     //
@@ -25,14 +25,14 @@ struct PotionCatalogView: View {
             ZStack{
                 Color.background.ignoresSafeArea()
                 VStack(alignment: .leading){
-                    Text("Potions")
+                    Text("Spells")
                         .font(.belle26)
                     ScrollView{
-                        if let potionCatalog = vm.potionCatalog{
+                        if let spellCatalog = vm.spellCatalog{
                             LazyVGrid(columns: columns){
-                                ForEach(potionCatalog){ potion in
+                                ForEach(spellCatalog){ spell in
 //                                    BookCard(book: book)
-                                    PotionCard(potion: potion)
+                                    SpellCard(spell: spell)
 //                                    Text("test")
                                 }
                             }
@@ -42,7 +42,7 @@ struct PotionCatalogView: View {
                 }
                 .padding()
                 .onAppear{
-                    vm.loadAllPotions()
+                    vm.loadAllSpells()
                 }
             }
         }

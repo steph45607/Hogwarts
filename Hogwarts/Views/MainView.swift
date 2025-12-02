@@ -48,13 +48,12 @@ struct MainView: View {
                                 Label("Characters", systemImage: "figure.wave")
                             }
                             NavigationLink {
-                                BookCatalogView()
+                                PotionCatalogView()
                             } label: {
-        //                        Text("Potions")
                                 Label("Potions", systemImage: "bubbles.and.sparkles")
                             }
                             NavigationLink {
-                                BookCatalogView()
+                                SpellCatalogView()
                             } label: {
                                 Label("Spells", systemImage: "wand.and.sparkles")
                             }
@@ -64,7 +63,6 @@ struct MainView: View {
                         }
                         .listRowBackground(Color.paper)
                     }
-//                    .content.background(.red)
                     .font(.belle18)
                     .foregroundColor(.steps)
                     .tint(.steps)

@@ -7,39 +7,25 @@
 
 import Foundation
 
-struct PotionCatalog: Codable{
-    let data : [PotionResponse]
+struct PotionCatalog: Codable {
+    let data: [PotionResponse]
 }
 
-struct PotionResponse : Identifiable, Codable {
+struct PotionResponse: Identifiable, Codable {
     let id: String
-    let attributes : Potion
+    let attributes: Potion
 }
 
-struct Potion : Codable {
-    let alias_names: [String]
-    let animagus: String?
-    let blood_status: String?
-    let boggart: String?
-    let born: String?
-    let died: String?
-    let eye_color: String?
-    let family_members: [String]
-    let gender: String?
-    let hair_color: String?
-    let height: String?
-    let house: String?
-    let image: String?
-    let jobs: [String]
-    let marital_status: String?
+struct Potion: Codable {
     let name: String
-    let nationality: String?
-    let patronus: String?
-    let romances: [String]
-    let skin_color: String?
-    let species: String?
-    let titles: [String]
-    let wands: [String]
-    let weight: String?
-    let wiki: String
+    let slug: String
+    let effect: String?
+    let side_effects: String?
+    let characteristics: String?
+    let difficulty: String?
+    let ingredients: String?
+    let inventors: String?
+    let manufacturers: String?
+    let image: String?
+    let wiki: String?
 }

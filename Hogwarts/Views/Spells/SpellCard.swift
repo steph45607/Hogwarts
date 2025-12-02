@@ -1,5 +1,5 @@
 //
-//  Card.swift
+//  SpellCard.swift
 //  Hogwarts
 //
 //  Created by Stephanie Staniswinata on 25/11/25.
@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-struct PotionCard: View {
-    @State var potion : PotionResponse
+struct SpellCard: View {
+    @State var spell : SpellResponse
     var body: some View {
         NavigationLink{
-            PotionDetailsView(potion: potion)
+            SpellDetailsView(spell: spell)
         }
         label:{
             VStack(alignment: .leading){
-                AsyncImage(url: URL(string: potion.attributes.image ?? "nil")) { phase in
+                AsyncImage(url: URL(string: spell.attributes.image ?? "nil")) { phase in
                     switch phase {
                     case .empty:
                         ProgressView()
@@ -45,17 +45,17 @@ struct PotionCard: View {
                         EmptyView()
                     }
                 }
-                Text(potion.attributes.name)
+                Text(spell.attributes.name)
                     .foregroundColor(.black)
                     .multilineTextAlignment(.leading)
                     .frame(width: 150, alignment: .leading)
-                Text(potion.attributes.effect ?? "")
+                Text(spell.attributes.light ?? "")
                     .foregroundColor(.black)
                     .multilineTextAlignment(.leading)
                     .frame(width: 150, alignment: .leading)
                     .font(.belle12)
                     .foregroundColor(.steps)
-                Text(potion.attributes.inventors ?? "")
+                Text(spell.attributes.incantation ?? "")
                     .foregroundColor(.black)
                     .multilineTextAlignment(.leading)
                     .frame(width: 150, alignment: .leading)

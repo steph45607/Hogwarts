@@ -16,12 +16,11 @@ class ViewModel: ObservableObject{
     @Published var potionCatalog: [PotionResponse]? = []
     @Published var spellCatalog: [SpellResponse]? = []
     @Published var characterCatalogPage :  Page = Page(current: 1, first: 1, prev: 0, next: 0, last: 0, records: 0)
-//    @Published var book : Book?
     @Published var bookCatalog: [BookResponse]? = []
     @Published var chapterList: [ChapterResponse]? = []
     
     func loadAllBooks(){
-        BookService.getAllBooks{ [weak self] result in
+        Services.getAllBooks{ [weak self] result in
             DispatchQueue.main.async{
                 print("dispatch getAllBooks")
                 switch result{
@@ -40,7 +39,7 @@ class ViewModel: ObservableObject{
     
     func loadAllChapters(bookId:String){
         chapterList = []
-        BookService.getAllChapters(bookId: String(bookId)){ [weak self] result in
+        Services.getAllChapters(bookId: String(bookId)){ [weak self] result in
             DispatchQueue.main.async{
                 print("dispatch getAllChapters")
                 print("VIEWMODEL ", bookId)
@@ -139,9 +138,9 @@ class ViewModel: ObservableObject{
 
     
     func loadAllPotions(){
-        Services.getAllPotions(){ [weak self] result in
+        Services.getAllPotions{ [weak self] result in
             DispatchQueue.main.async{
-                print("dispatch getAllMovies")
+                print("dispatch getAllBooks")
                 switch result{
                 case .success(let potionCatalog):
                     print("success vm load one")
@@ -152,6 +151,7 @@ class ViewModel: ObservableObject{
                     self?.errorMessage = self?.mapError(error)
                 }
             }
+            
         }
     }
     
@@ -173,7 +173,7 @@ class ViewModel: ObservableObject{
     func loadAllSpells(){
         Services.getAllSpells(){ [weak self] result in
             DispatchQueue.main.async{
-                print("dispatch getAllMovies")
+                print("dispatch getAllSpells")
                 switch result{
                 case .success(let spellCatalog):
                     print("success vm load one")

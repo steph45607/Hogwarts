@@ -14,7 +14,7 @@ struct MovieDetailsView: View {
     var body: some View {
         ScrollView{
             VStack{
-                AsyncImage(url: URL(string: movie.attributes.poster!)) { phase in
+                AsyncImage(url: URL(string: movie.attributes.poster ?? "null")) { phase in
                     switch phase {
                     case .empty:
                         ProgressView()

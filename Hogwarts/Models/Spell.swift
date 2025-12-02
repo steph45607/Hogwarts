@@ -7,40 +7,25 @@
 
 import Foundation
 
-
-struct SpellCatalog: Codable{
-    let data : [SpellResponse]
+struct SpellCatalog: Codable {
+    let data: [SpellResponse]
 }
 
-struct SpellResponse : Identifiable, Codable {
+struct SpellResponse: Identifiable, Codable {
     let id: String
-    let attributes : Spell
+    let attributes: Spell
 }
 
-struct Spell : Codable {
-    let alias_names: [String]
-    let animagus: String?
-    let blood_status: String?
-    let boggart: String?
-    let born: String?
-    let died: String?
-    let eye_color: String?
-    let family_members: [String]
-    let gender: String?
-    let hair_color: String?
-    let height: String?
-    let house: String?
-    let image: String?
-    let jobs: [String]
-    let marital_status: String?
+struct Spell: Codable {
     let name: String
-    let nationality: String?
-    let patronus: String?
-    let romances: [String]
-    let skin_color: String?
-    let species: String?
-    let titles: [String]
-    let wands: [String]
-    let weight: String?
-    let wiki: String
+    let slug: String
+    let incantation: String?
+    let effect: String?
+    let type: String?
+    let light: String?
+    let hand: String?
+    let creator: String?
+    let image: String?
+    let wiki: String?
+    let category: String?
 }

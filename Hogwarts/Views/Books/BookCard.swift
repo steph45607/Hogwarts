@@ -19,7 +19,7 @@ struct BookCard: View {
                     switch phase {
                     case .empty:
                         ProgressView()
-                            .frame(width: 150, height: 230)
+                            .frame(width: 120, height: 180)
                             .background(Color.gray.opacity(0.2))
                             .cornerRadius(8)
 
@@ -27,7 +27,7 @@ struct BookCard: View {
                         image
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 150)
+                            .frame(width: 120)
                             .cornerRadius(8)
 
                     case .failure(_):
@@ -35,7 +35,7 @@ struct BookCard: View {
                             .font(.largeTitle)
 //                            .resizable()
 //                            .scaledToFit()
-                            .frame(width: 150, height: 230)
+                            .frame(width: 120, height: 180)
                             .foregroundColor(.gray)
 //                            .padding()
                             .background(Color.gray.opacity(0.2))

@@ -14,7 +14,7 @@ struct CharacterDetailsView: View {
     var body: some View {
         ScrollView{
             VStack{
-                AsyncImage(url: URL(string: character.attributes.image!)) { phase in
+                AsyncImage(url: URL(string: character.attributes.image ?? "null")) { phase in
                     switch phase {
                     case .empty:
                         ProgressView()

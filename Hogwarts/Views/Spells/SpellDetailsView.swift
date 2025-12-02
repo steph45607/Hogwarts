@@ -1,5 +1,5 @@
 //
-//  MovieDetailsView.swift
+//  SpellDetailsView.swift
 //  Hogwarts
 //
 //  Created by Stephanie Staniswinata on 25/11/25.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct PotionDetailsView: View {
-    @State var potion : PotionResponse
+struct SpellDetailsView: View {
+    @State var spell : SpellResponse
     @ObservedObject private var vm = ViewModel()
     
     var body: some View {
         ScrollView{
             VStack{
-                AsyncImage(url: URL(string: potion.attributes.image ?? "null")) { phase in
+                AsyncImage(url: URL(string: spell.attributes.image ?? "null")) { phase in
                     switch phase {
                     case .empty:
                         ProgressView()
@@ -38,12 +38,11 @@ struct PotionDetailsView: View {
                             .padding()
                             .background(Color.gray.opacity(0.2))
                             .cornerRadius(8)
-
                     @unknown default:
                         EmptyView()
                     }
                 }
-                Text(potion.attributes.name)
+                Text(spell.attributes.name)
                     .padding(.horizontal)
                     .frame(width: 400)
                     .multilineTextAlignment(.center)
@@ -51,13 +50,27 @@ struct PotionDetailsView: View {
                 
                 HStack{
                     VStack{
-                        Text("Difficulty")
-                            Text("\(potion.attributes.difficulty ?? "-")")
+                        Text("Category")
+                        Text("\(spell.attributes.category ?? "-")")
                     }
                     Rectangle()
                         .fill(Color.black)
                         .frame(width: 1, height: 50)
-                    Link(destination: URL(string: potion.attributes.wiki!)!) {
+                    VStack{
+                        Text("Hand")
+                            Text("\(spell.attributes.hand ?? "-")")
+                    }
+                    Rectangle()
+                        .fill(Color.black)
+                        .frame(width: 1, height: 50)
+                    VStack{
+                        Text("Light")
+                            Text("\(spell.attributes.light ?? "-")")
+                    }
+                    Rectangle()
+                        .fill(Color.black)
+                        .frame(width: 1, height: 50)
+                    Link(destination: URL(string: spell.attributes.wiki ?? "")!) {
                         VStack{
                             Text("Wiki")
                             Image(systemName: "globe")
@@ -70,21 +83,18 @@ struct PotionDetailsView: View {
                 HStack{
                     VStack(alignment:.leading){
                         HStack(alignment: .top){
-                            Text("Inventor:")
-                            Text(potion.attributes.inventors ?? "Not found")
+                            Text("Creator:")
+                            Text(spell.attributes.creator ?? "Not found")
                         }
                         HStack(alignment: .top){
-                            Text("Manufacturers:")
-                            Text(potion.attributes.manufacturers ?? "Not found")
+                            Text("Effect:")
+                            Text(spell.attributes.effect ?? "Not found")
                         }
                         HStack(alignment: .top){
-                            Text("Effects:")
-                            Text(potion.attributes.effect ?? "Not found")
+                            Text("Incantation:")
+                            Text(spell.attributes.incantation ?? "Not found")
                         }
-                        HStack(alignment: .top){
-                            Text("Characteristics:")
-                            Text(potion.attributes.characteristics ?? "Not found")
-                        }
+
                     }
                     Spacer()
                 }
